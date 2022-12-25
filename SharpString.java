@@ -24,7 +24,7 @@ class SharpString {
             ) {
                 percent += s.charAt(n);
             }else {
-                percent += "_" + toAsciiCode(s.charAt(n)) + "_";
+                percent += "_" + convertToUnicode(s.charAt(n)) + "_";
             }
         }
         return percent;
@@ -47,7 +47,7 @@ class SharpString {
                         tmp += ps.charAt(n + i);
                     }
                 }
-                s += String.valueOf((char)Integer.parseInt(tmp));
+                s += String.valueOf(convertToOiginal(Integer.parseInt(tmp)));
             }else {
                 s += String.valueOf(ps.charAt(n));
             }
@@ -59,5 +59,15 @@ class SharpString {
             }
         }
         return s;
+    }
+
+    static int convertToUnicode(char original) {
+        return Character.codePointAt(String.valueOf(original), 0);
+    }
+    static char convertToOiginal(int unicode) {  
+        int[] unichar = {
+            unicode
+        };
+        return new String(unichar, 0, 1).charAt(0);
     }
 }

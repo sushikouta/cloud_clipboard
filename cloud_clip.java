@@ -67,7 +67,9 @@ public class cloud_clip {
             this.room_id = room_id;
         }
         boolean running = false;
+        get_clone get = null;
         public void shutdown() {
+            get.shutdown();
             running = false;
         }
         @Override public synchronized void run() {
@@ -75,7 +77,7 @@ public class cloud_clip {
             String last_clip = "";
             Toolkit kit = Toolkit.getDefaultToolkit();
 	        Clipboard clip = kit.getSystemClipboard();
-            get_clone get = new get_clone(password, room_id);
+            get = new get_clone(password, room_id);
             new Thread(get) {{ start(); }};
             while (running) {
                 try {
@@ -115,6 +117,8 @@ public class cloud_clip {
     }
 
     public cloud_clip() {
+        System.out.println("cloud_clip");
+        System.out.println("README.txt に使い方が書いてあります。");
         boolean running = true;
         Scanner sc = new Scanner(System.in);
         while (running) {
